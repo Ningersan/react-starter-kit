@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "react quick start",
   "scripts": {
-    "start": "webpack-dev-server --devtool eval --progress --colors --open --inline --content-base build",
+    "start": "webpack-dev-server --progress --open",
     "build": "webpack --config webpack.config.prod.js",
     "lint": "eslint",
     "lint-fix": "eslint --fix"
