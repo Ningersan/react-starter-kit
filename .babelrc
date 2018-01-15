@@ -1,4 +1,9 @@
 {
-    "presets": ["env", "es2015", "stage-1", "react"],
-    "plugins": ["transform-class-properties"]
+    "presets": [
+        "env",
+        ["es2015", {"modules": false}],
+        "stage-1",
+        "react"
+    ],
+    "plugins": ["react-hot-loader/babel", "transform-class-properties"]
 }

@@ -1,39 +1,42 @@
 const path = require('path')
 const webpack = require('webpack')
 const autoprefixer = require('autoprefixer')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
-    // 入口文件  要不要__dirname 待定
-    entry: "./src/index.js",
+    // 入口文件
+    entry: [
+        // 'babel-polyfill',
+        'react-hot-loader/patch',
+        './src/index.js',
+    ],
 
     output: {
         // build输出文件路径
         path: path.resolve(__dirname, 'build'),
         // 打包后输出得文件名
-        filename: "bundle.js",
+        filename: 'bundle.js',
         // 热更新资源路径
-        publicPath: "/build",
+        // after adding html-webpack-plugin, this should del
+        publicPath: '/',
     },
 
-    // 什么意思
     resolve: {
         alias: { _: path.resolve(__dirname, 'src') },
         extensions: ['.js', '.jsx'],
     },
 
-    devtool: "eval-source-map",
+    devtool: 'eval-source-map',
 
     module: {
         rules: [
             {
                 test: /\.jsx?$/,
                 include: [
-                    path.resolve(__dirname, "src")
+                    path.resolve(__dirname, 'src'),
                 ],
-                exclude: [
-                    path.resolve(__dirname, "node_modules")
-                ],
-                loader: "babel-loader"
+                exclude: /node_modules/,
+                loader: 'babel-loader',
             },
             {
                 test: /\.css$/,
@@ -53,10 +56,10 @@ module.exports = {
                 test: /\.scss$/,
                 use: [
                     {
-                        loader: "style-loader",
+                        loader: 'style-loader',
                     },
                     {
-                        loader: "css-loader",
+                        loader: 'css-loader',
                         options: {
                             minimize: true,
                             modules: true,
@@ -64,7 +67,7 @@ module.exports = {
                         },
                     },
                     {
-                        loader: "postcss-loader",
+                        loader: 'postcss-loader',
                         options: {
                             plugins() {
                                 return [autoprefixer]
@@ -72,7 +75,19 @@ module.exports = {
                         },
                     },
                     {
-                        loader: "sass-loader",
+                        loader: 'sass-loader',
+                    },
+                ],
+            },
+
+            {
+                test: /\.(png|jpg|jpeg|gif|eot|ttf|woff|woff2|svg|svgz)(\?.+)?$/,
+                use: [
+                    {
+                        loader: 'url-loader',
+                        options: {
+                            limit: 10000,
+                        },
                     },
                 ],
             },
@@ -82,13 +97,22 @@ module.exports = {
     plugins: [
         // 压缩bundle
         new webpack.optimize.UglifyJsPlugin(),
+        new HtmlWebpackPlugin({
+            title: 'react Quick Start',
+            template: path.resolve(__dirname, 'index.tmpl.html'),
+            favicon: path.resolve(__dirname, 'static/images/favicon.ico'),
+        }),
+        new webpack.HotModuleReplacementPlugin(),
+        new webpack.NamedModulesPlugin(),
     ],
 
     devServer: {
+        port: 3300,
         hot: true,
         inline: true,
         // 静态资源路径（.html）
-        contentBase: './',
+        // contentBase: './',
+        publicPath: '/',
         historyApiFallback: true,
     },
 }
