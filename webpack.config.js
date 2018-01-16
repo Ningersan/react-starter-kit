@@ -8,6 +8,7 @@ module.exports = {
     entry: [
         // 'babel-polyfill',
         'react-hot-loader/patch',
+        'webpack/hot/only-dev-server',
         './src/index.js',
     ],
 
@@ -16,8 +17,7 @@ module.exports = {
         path: path.resolve(__dirname, 'build'),
         // 打包后输出得文件名
         filename: 'bundle.js',
-        // 热更新资源路径
-        // after adding html-webpack-plugin, this should del
+        // 热更新资源路径(误)
         publicPath: '/',
     },
 
@@ -26,7 +26,7 @@ module.exports = {
         extensions: ['.js', '.jsx'],
     },
 
-    devtool: 'eval-source-map',
+    devtool: 'cheap-eval-source-map',
 
     module: {
         rules: [
@@ -95,8 +95,8 @@ module.exports = {
     },
 
     plugins: [
-        // 压缩bundle
-        new webpack.optimize.UglifyJsPlugin(),
+        // 压缩bundle,·开发模式可不用
+        // new webpack.optimize.UglifyJsPlugin(),
         new HtmlWebpackPlugin({
             title: 'react Quick Start',
             template: path.resolve(__dirname, 'index.tmpl.html'),
