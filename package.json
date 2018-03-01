@@ -5,8 +5,8 @@
   "scripts": {
     "start": "webpack-dev-server --open",
     "build": "webpack --config webpack.config.prod.js",
-    "lint": "eslint",
-    "lint-fix": "eslint --fix"
+    "lint": "eslint src",
+    "lint-fix": "eslint src --fix"
   },
   "main": "index.js",
   "author": "Ningersan",
