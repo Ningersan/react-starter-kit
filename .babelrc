@@ -2,8 +2,10 @@
     "presets": [
         "env",
         ["es2015", {"modules": false}],
+        "es2017",
         "stage-1",
+        "stage-3",
         "react"
     ],
-    "plugins": ["react-hot-loader/babel", "transform-class-properties"]
+    "plugins": ["react-hot-loader/babel", "transform-class-properties", "transform-decorators-legacy", "transform-runtime"]
 }
