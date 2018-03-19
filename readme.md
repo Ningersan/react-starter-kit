@@ -17,4 +17,10 @@ yarn lint
 yarn lint-fix // auto fix
 ```
 
+prettier
+
+```
+yarn format
+```
+
 to be continued...

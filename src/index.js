@@ -4,12 +4,12 @@ import { AppContainer } from 'react-hot-loader'
 import App from './containers/App/App'
 import './styles/normalize.css'
 
-const render = (Component) => {
+const render = Component => {
     ReactDOM.render(
         <AppContainer>
             <Component />
         </AppContainer>,
-        document.getElementById('root'),
+        document.getElementById('root')
     )
 }
 
